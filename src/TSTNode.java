@@ -9,6 +9,7 @@ class TSTNode<T extends Comparable<T>>{
     // TODO: implement the node class here
     
     TSTNode(T element){
+        this.element = element;
 
     }
 

@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TST<T extends Comparable<T>> implements Iterable<T>{
@@ -9,10 +11,21 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
         this.root = null;
     }
 
-    // TODO: implement the tree class here
+    class TreeNode<T> {
+        T element;
 
-    public void insert(T element){
-        
+        ArrayList<TreeNode> children;
+
+        TreeNode<T> parent;
+    }
+
+    public void insert(T element, T root){
+        if (root == null) {
+            //this.root = element;
+        }
+        if ( element.compareTo(root) == 0) {
+
+        }
     }
 
     public void remove(T element){
