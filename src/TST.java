@@ -11,21 +11,48 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
         this.root = null;
     }
 
-    class TreeNode<T> {
-        T element;
+//    class TreeNode<T> {
+//        T element;
+//
+//        ArrayList<TreeNode> children;
+//
+//        TreeNode<T> parent;
+//    }
 
-        ArrayList<TreeNode> children;
-
-        TreeNode<T> parent;
+    public void insert(T element){
+        this.root = add(root, element);
     }
 
-    public void insert(T element, T root){
+    public TSTNode<T> add(TSTNode<T> root, T key) {
         if (root == null) {
-            //this.root = element;
+            root = new TSTNode<T>(key);
         }
-        if ( element.compareTo(root) == 0) {
-
+        else if (key.compareTo(root.element) == 0) {
+            root.mid = add(root.mid, key);
         }
+        else if (key.compareTo(root.element) < 0) {
+            root.left = add(root.left, key);
+        }
+        else if (key.compareTo(root.element) > 0) {
+            root.right = add(root.right, key);
+        }
+        return root;
+    }
+    public boolean containPart2(TSTNode<T> root, T key) {
+        boolean contain = false;
+        if (root == null) {
+            contain = false;
+        }
+        else if (key.compareTo(root.element) == 0) {
+            contain = true;
+        }
+        else if (key.compareTo(root.element) < 0) {
+            contain = containPart2(root.left, key);
+        }
+        else if (key.compareTo(root.element) > 0) {
+            contain = containPart2(root.right, key);
+        }
+        return contain;
     }
 
     public void remove(T element){
@@ -33,7 +60,9 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
     }
 
     public boolean contains(T element){
-        return false;
+
+        boolean contain = containPart2(root, element);
+        return contain;
     }
 
     public void rebalance(){
