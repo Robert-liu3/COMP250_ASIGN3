@@ -11,6 +11,10 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
         this.root = null;
     }
 
+    public TSTNode<T> getRoot() {
+        return root;
+    }
+
 //    class TreeNode<T> {
 //        T element;
 //

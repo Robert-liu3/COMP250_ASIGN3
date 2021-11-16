@@ -10,7 +10,6 @@ class TSTNode<T extends Comparable<T>>{
     
     TSTNode(T element){
         this.element = element;
-
     }
 
     TSTNode<T> findMax(){
@@ -22,8 +21,12 @@ class TSTNode<T extends Comparable<T>>{
     }
 
     int height(){
-        return -1;
+        int heightOfTree = -1;
+        if (this.left != null);
+        return heightOfTree;
     }
-
+    int height(TSTNode<T> root) {
+        if (root )
+    }
     // add your own helper methods if necessary
 }
