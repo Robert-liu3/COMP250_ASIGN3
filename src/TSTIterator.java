@@ -1,21 +1,25 @@
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 // add your imports here
 
 class TSTIterator<T extends Comparable<T>> implements Iterator<T> {
-     Iterator nodeIterator;
+     private Iterator nodeIterator;
     // TODO: implement the iterator class here
     // add your own helper methods if necessary
     TSTIterator(TST tree) {
-        LinkedList nodeList = new LinkedList<TSTNode>();
+        LinkedList nodeList = new LinkedList<T>();
         addToList(tree.root, nodeList);
+        nodeList.sort(Comparator.naturalOrder());
         nodeIterator = nodeList.iterator();
+
     }
     public void addToList(TSTNode root, LinkedList nodeList) {
         if (root == null) {
             return;
         }
-        nodeList.add(root);
+        nodeList.add(root.getElement());
         if (root.left != null) {
             addToList(root.left, nodeList);
         }
@@ -26,6 +30,7 @@ class TSTIterator<T extends Comparable<T>> implements Iterator<T> {
             addToList(root.right, nodeList);
         }
     }
+
     /**
      * Returns {@code true} if the iteration has more elements. (In other words, returns {@code true} if {@link #next}
      * would return an element rather than throwing an exception.)
@@ -47,7 +52,7 @@ class TSTIterator<T extends Comparable<T>> implements Iterator<T> {
      */
     @Override
     public T next() {
-        nodeIterator.next();
-        return null;
+        T nextObject = (T) nodeIterator.next();
+        return nextObject;
     }
 }
