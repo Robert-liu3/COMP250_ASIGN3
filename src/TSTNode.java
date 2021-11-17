@@ -74,5 +74,8 @@ class TSTNode<T extends Comparable<T>>{
         }
         return maxNum;
     }
+    public T getElement() {
+        return element;
+    }
     // add your own helper methods if necessary
 }

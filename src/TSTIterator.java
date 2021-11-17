@@ -1,15 +1,17 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Iterator;
 // add your imports here
 
 class TSTIterator<T extends Comparable<T>> implements Iterator<T> {
+     Iterator nodeIterator;
     // TODO: implement the iterator class here
     // add your own helper methods if necessary
     TSTIterator(TST tree) {
-        ArrayList elementList = new ArrayList();
-        elementList.add(tree.root);
+        LinkedList nodeList = new LinkedList<TSTNode>();
+        addToList(tree.root, nodeList);
+        nodeIterator = nodeList.iterator();
     }
-    public void addToList(TSTNode root, ArrayList nodeList) {
+    public void addToList(TSTNode root, LinkedList nodeList) {
         if (root == null) {
             return;
         }
@@ -32,7 +34,7 @@ class TSTIterator<T extends Comparable<T>> implements Iterator<T> {
      */
     @Override
     public boolean hasNext() {
-        return false;
+        return nodeIterator.hasNext();
     }
 
     /**
@@ -45,7 +47,7 @@ class TSTIterator<T extends Comparable<T>> implements Iterator<T> {
      */
     @Override
     public T next() {
-
+        nodeIterator.next();
         return null;
     }
 }
