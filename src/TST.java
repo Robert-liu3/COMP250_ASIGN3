@@ -95,8 +95,8 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
      */
     @Override
     public Iterator iterator() {
-        // TODO: implement the iterator method here
-        return null;
+        TSTIterator iterator = new TSTIterator(this);
+        return iterator;
     }
 
     // --------------------PROVIDED METHODS--------------------
