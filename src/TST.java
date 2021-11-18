@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TST<T extends Comparable<T>> implements Iterable<T>{
     // root node of the tree
@@ -69,9 +71,18 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
     }
 
     public void rebalance(){
-        
-    }
+        ArrayList<T> list = new ArrayList<T>();
+        inorder(this.root, list);
 
+    }
+    public void inorder(TSTNode<T> root, List<T> nodeList) {
+        if (root != null) {
+            inorder(root.left, nodeList);
+            nodeList.add(root.getElement());
+            inorder(root.mid, nodeList);
+            inorder(root.right, nodeList);
+        }
+    }
     // add your own helper methods if necessary
 
     

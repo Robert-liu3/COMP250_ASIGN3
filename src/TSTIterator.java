@@ -8,16 +8,8 @@ class TSTIterator<T extends Comparable<T>> implements Iterator<T> {
     // add your own helper methods if necessary
     TSTIterator(TST tree) {
         LinkedList nodeList = new LinkedList<T>();
-        inorder(tree.root, nodeList);
+        tree.inorder(tree.root, nodeList);
         nodeIterator = nodeList.iterator();
-    }
-    public void inorder(TSTNode<T> root, LinkedList<T> nodeList) {
-        if (root != null) {
-            inorder(root.left, nodeList);
-            nodeList.add(root.getElement());
-            inorder(root.mid, nodeList);
-            inorder(root.right, nodeList);
-        }
     }
     public void addToList(TSTNode<T> root, LinkedList nodeList) {
         if (root == null) {
