@@ -62,7 +62,46 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
     }
 
     public void remove(T element){
-        
+        //if there is a middle case, remove middle case
+        //if there is a right case, replace it with the right node
+        //if there is a left case, replace it with the left node
+        root = remove(root, element);
+    }
+
+    public TSTNode<T> remove(TSTNode<T> node, T element) {
+        TSTNode<T> tmp = null;
+        if (node == null) {
+            return node;
+        }
+        else if (element.compareTo(node.getElement()) < 0) {
+            node.left = remove(node.left, element);
+        }
+        else if (element.compareTo(node.getElement()) > 0) {
+            node.right = remove(node.right, element);
+        }
+        else if (node.mid != null && element.compareTo(node.mid.getElement()) == 0) {
+            node.mid = remove(node.mid, element);
+        }
+        else {
+            if (node.left == null && node.mid == null && node.right == null) {
+                return null;
+            }
+            else if (node.left == null && node.mid == null) {
+                node = node.right;
+            }
+            else if (node.right == null && node.mid == null) {
+                node = node.left;
+            }
+            else if (node.right == null && node.left == null) {
+                node = node.mid;
+            }
+            else if (node.mid == null) {
+                tmp = node.findMax();
+                remove(node.findMax(), node.findMax().getElement());
+                node = node.findMax();
+            }
+        }
+        return node;
     }
 
     public boolean contains(T element){
