@@ -8,4 +8,5 @@ public class main {
         tree.insert('2');
         System.out.printf(tree.toString());
     }
+    
 }

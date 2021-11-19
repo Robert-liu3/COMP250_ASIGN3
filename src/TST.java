@@ -70,7 +70,7 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
 
     public TSTNode<T> remove(TSTNode<T> node, T element) {
         TSTNode<T> tmp = null;
-        TSTNode<T> right = null;
+        TSTNode<T> tmp2 = null;
         TSTNode<T> left = null;
         if (node == null) {
             return node;
@@ -99,7 +99,15 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
             }
             else if (node.mid == null) {
                 tmp = node.left.findMax();
-                node.left = remove(node.left, tmp.getElement());
+                tmp2 = node;
+                node.element = tmp.getElement();
+                while (tmp.mid != null) {
+                    tmp2.mid = tmp.mid;
+                    tmp2 = tmp2.mid;
+                    tmp = tmp.mid;
+                    node.left = remove(node.left, node.element);
+                }
+                node.left = remove(node.left, node.element);
             }
         }
         return node;
