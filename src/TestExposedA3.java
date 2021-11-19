@@ -589,6 +589,7 @@ public class TestExposedA3 {
         tree.rebalance();
 
         assertEquals(3, tree.root.element);
+        assertEquals(3, tree.root.element);
         assertEquals(0, tree.root.left.element);
         assertEquals(-1, tree.root.left.left.element);
         assertEquals(-1, tree.root.left.left.mid.element);

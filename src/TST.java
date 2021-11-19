@@ -43,6 +43,7 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
         }
         return root;
     }
+
     public boolean containPart2(TSTNode<T> root, T key) {
         boolean contain = false;
         if (root == null) {
@@ -72,7 +73,39 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
 
     public void rebalance(){
         ArrayList<T> list = new ArrayList<T>();
+        TST tree = new TST();
         inorder(this.root, list);
+        //tree.root = new TSTNode<T>(null);
+        tree.partition(list, tree.root);
+        this.root = tree.root;
+    }
+    public void partition(List<T> list, TSTNode<T> node) {
+        ArrayList<T> list1 = null;
+        ArrayList<T> list2 = null;
+        int midIndex = list.size()/2;
+
+        insert(list.get(midIndex));
+        //node = new TSTNode<T>(list.get(midIndex));
+        if (midIndex >= 0 && midIndex <= list.size()){
+            list1 = new ArrayList<>(list.subList(0, midIndex ));
+            list2 = new ArrayList<>(list.subList(midIndex+1, list.size()));
+        } else return;
+
+
+        if (list1.size() != 0 ) if (list1.get(list1.size()/2).compareTo(list.get(midIndex)) < 0) {
+            partition(list1, node.left);
+        }
+        else if (list1.get(list1.size()/2).compareTo(list.get(midIndex)) == 0){
+            partition(list1, node.mid);
+        }
+        if (list2.size() != 0) if (list2.get(list2.size()/2).compareTo(list.get(midIndex)) > 0) {
+            partition(list2, node.right);
+        }
+        else if (list2.get(list2.size()/2).compareTo(list.get(midIndex)) == 0) {
+            partition(list2, node.mid);
+        }
+
+        return;
 
     }
     public void inorder(TSTNode<T> root, List<T> nodeList) {
