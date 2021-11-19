@@ -77,20 +77,23 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
         inorder(this.root, list);
         //tree.root = new TSTNode<T>(null);
         root = null;
-        root = partition(list, root);
+        root = partition(list);
         //this.root = tree.root;
     }
-    public TSTNode<T> partition(List<T> list, TSTNode<T> node) {
-        ArrayList<T> leftList = null;
-        ArrayList<T> rightList = null;
-        ArrayList<T> midList = null;
+    public TSTNode<T> partition(List<T> list) {
+        ArrayList<T> leftList = new ArrayList<T>();
+        ArrayList<T> rightList = new ArrayList<T>();
+        ArrayList<T> midList = new ArrayList<T>();
         int midIndex = list.size()/2;
 
-        node = new TSTNode<>(list.get(midIndex));
-        //node = new TSTNode<T>(list.get(midIndex));
+
+        TSTNode<T> node = new TSTNode<>(list.get(midIndex));
+
 
         leftList = new ArrayList<>(list.subList(0, midIndex ));
         rightList = new ArrayList<>(list.subList(midIndex+1, list.size()));
+
+
         while(leftList.size() != 0 && leftList.get(leftList.size()-1) == node.getElement()) {
             midList.add(node.getElement());
             leftList.remove(leftList.size()-1);
@@ -99,17 +102,16 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
             midList.add(node.getElement());
             rightList.remove(node.getElement());
         }
-        if (leftList.size() <= 1 && rightList.size() <= 1) {
 
-        }
+
         if (leftList.size() != 0 ) if (leftList.get(leftList.size()/2).compareTo(list.get(midIndex)) < 0) {
-            node.left = partition(leftList, node.left);
+            node.left = partition(leftList);
         }
         if (rightList.size() != 0) if (rightList.get(rightList.size()/2).compareTo(list.get(midIndex)) > 0) {
-            node.right = partition(rightList, node.right);
+            node.right = partition(rightList);
         }
         if (midList.size() != 0) {
-            node.mid = partition(midList, node.mid);
+            node.mid = partition(midList);
         }
         return node;
     }
