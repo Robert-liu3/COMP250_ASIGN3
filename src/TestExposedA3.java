@@ -605,4 +605,44 @@ public class TestExposedA3 {
         assertEquals(8, tree.root.right.right.element);
         assertEquals(5, tree.root.right.left.mid.element);
     }
+    @Test
+    @DisplayName("Obscure removal case")
+    void testRemoveTest6() {
+        tree = new TST<>();
+        tree.insert(0);
+        tree.insert(0);
+        tree.insert(-10);
+        tree.insert(-9);
+        tree.insert(-8);
+        tree.insert(-7);
+        tree.insert(-6);
+        tree.insert(-5);
+        tree.insert(-4);
+        tree.insert(-1);
+        tree.insert(-1);
+        tree.insert(-2);
+        tree.insert(-2);
+        tree.insert(-3);
+        tree.insert(10);
+
+        tree.remove(0);
+
+        assertNotNull(tree.root);
+        assertEquals(0, tree.root.element);
+
+        tree.remove(0);
+
+        assertNotNull(tree.root);
+        assertEquals(-1, tree.root.element);
+        assertNotNull(tree.root.mid);
+        assertEquals(-1, tree.root.mid.element);
+        assertNotNull(tree.root.left.right.right.right.right.right.right.right);
+        assertEquals(-2, tree.root.left.right.right.right.right.right.right.right.element);
+        assertNotNull(tree.root.left.right.right.right.right.right.right.right.left);
+        assertEquals(-3, tree.root.left.right.right.right.right.right.right.right.left.element);
+        assertNotNull(tree.root.left.right.right.right.right.right.right.right.mid);
+        assertEquals(-2, tree.root.left.right.right.right.right.right.right.right.mid.element);
+        assertNotNull(tree.root.right);
+        assertEquals(10, tree.root.right.element);
+    }
 }
