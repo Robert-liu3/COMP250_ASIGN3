@@ -81,33 +81,37 @@ public class TST<T extends Comparable<T>> implements Iterable<T>{
         //this.root = tree.root;
     }
     public TSTNode<T> partition(List<T> list, TSTNode<T> node) {
-        ArrayList<T> list1 = null;
-        ArrayList<T> list2 = null;
+        ArrayList<T> leftList = null;
+        ArrayList<T> rightList = null;
+        ArrayList<T> midList = null;
         int midIndex = list.size()/2;
 
         node = new TSTNode<>(list.get(midIndex));
         //node = new TSTNode<T>(list.get(midIndex));
-        if (midIndex >= 0 && midIndex <= list.size()){
-            list1 = new ArrayList<>(list.subList(0, midIndex ));
-            list2 = new ArrayList<>(list.subList(midIndex+1, list.size()));
-        } else return node;
 
+        leftList = new ArrayList<>(list.subList(0, midIndex ));
+        rightList = new ArrayList<>(list.subList(midIndex+1, list.size()));
+        while(leftList.size() != 0 && leftList.get(leftList.size()-1) == node.getElement()) {
+            midList.add(node.getElement());
+            leftList.remove(leftList.size()-1);
+        }
+        while(rightList.size() != 0 && rightList.get(0) == node.getElement()) {
+            midList.add(node.getElement());
+            rightList.remove(node.getElement());
+        }
+        if (leftList.size() <= 1 && rightList.size() <= 1) {
 
-        if (list1.size() != 0 ) if (list1.get(list1.size()/2).compareTo(list.get(midIndex)) < 0) {
-            node.left = partition(list1, node.left);
         }
-        else if (list1.get(list1.size()/2).compareTo(list.get(midIndex)) == 0){
-            node.mid = partition(list1, node.mid);
+        if (leftList.size() != 0 ) if (leftList.get(leftList.size()/2).compareTo(list.get(midIndex)) < 0) {
+            node.left = partition(leftList, node.left);
         }
-        if (list2.size() != 0) if (list2.get(list2.size()/2).compareTo(list.get(midIndex)) > 0) {
-            node.right = partition(list2, node.right);
+        if (rightList.size() != 0) if (rightList.get(rightList.size()/2).compareTo(list.get(midIndex)) > 0) {
+            node.right = partition(rightList, node.right);
         }
-        else if (list2.get(list2.size()/2).compareTo(list.get(midIndex)) == 0) {
-            node.mid = partition(list2, node.mid);
+        if (midList.size() != 0) {
+            node.mid = partition(midList, node.mid);
         }
-
         return node;
-
     }
     public void inorder(TSTNode<T> root, List<T> nodeList) {
         if (root != null) {
