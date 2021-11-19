@@ -585,7 +585,12 @@ public class TestExposedA3 {
         tree.insert(5);
         tree.insert(7);
         tree.insert(8);
-
+        //-1, -1, 0, 0, 2, 3, 5, 5, 7, 8
+        /*
+        [-1, -1, 0, 0, 2] 3 [5, 5, 7, 8]
+        [-1, -1] 0 [0,2] | [5, 5] 7 [8]
+        [-1,
+         */
         tree.rebalance();
 
         assertEquals(3, tree.root.element);
