@@ -3,10 +3,13 @@ public class main {
         TST<Character> tree = new TST<>();
 
         tree.insert('5');
-        tree.insert('0');
-        tree.insert('4');
         tree.insert('2');
-        System.out.printf(tree.toString());
+        tree.insert('4');
+        tree.insert('3');
+        tree.insert('4');
+        System.out.println(tree.toString());
+        tree.remove('5');
+        System.out.println(tree.toString());
     }
 
 }
